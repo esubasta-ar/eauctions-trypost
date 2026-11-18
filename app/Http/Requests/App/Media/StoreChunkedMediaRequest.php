@@ -23,7 +23,8 @@ class StoreChunkedMediaRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        $parsed = sscanf((string) $this->header('Content-Range'), 'bytes %d-%d/%d') ?: [];
+        $contentRange = $this->header('Content-Range') ?: $this->header('X-Content-Range');
+        $parsed = sscanf((string) $contentRange, 'bytes %d-%d/%d') ?: [];
 
         $this->merge([
             'range_start' => $parsed[0] ?? null,

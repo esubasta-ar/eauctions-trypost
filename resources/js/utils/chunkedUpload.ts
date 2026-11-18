@@ -135,6 +135,7 @@ export const uploadChunked = async (options: ChunkedUploadOptions): Promise<Medi
             const headers: Record<string, string> = {
                 'Content-Type': 'application/octet-stream',
                 'Content-Range': `bytes ${start}-${end - 1}/${totalSize}`,
+                'X-Content-Range': `bytes ${start}-${end - 1}/${totalSize}`,
                 'X-File-Name': encodeURIComponent(file.name),
                 'X-Upload-Id': uploadId,
                 'X-CSRF-TOKEN': csrfToken,
